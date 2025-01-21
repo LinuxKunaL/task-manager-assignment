@@ -1,0 +1,17 @@
+{
+  "name": "task-manager-assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.3"
+  }
+}
