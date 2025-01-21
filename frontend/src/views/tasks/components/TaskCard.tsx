@@ -19,9 +19,9 @@ function TaskCard(props: Props) {
   return (
     <Card
       key={props.id}
-      className="bg-white hover:bg-gray-50   hover:dark:bg-gray-800/90  dark:bg-gray-800"
+      className="bg-white hover:bg-gray-50  hover:dark:bg-gray-800/90  dark:bg-gray-800"
     >
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full sm:flex-row flex-col sm:gap-0 gap-4">
         <div
           className="flex flex-row gap-4 items-center w-full cursor-pointer"
           onClick={() => props.handleViewTask(props.id)}
@@ -37,7 +37,7 @@ function TaskCard(props: Props) {
             {props.title}
           </h5>
         </div>
-        <div className="flex gap-4 items-center select-none">
+        <div className="flex gap-4 items-center select-none  justify-end">
           <Badge
             color={!isCompleted ? "warning" : "green"}
             icon={!isCompleted ? FaClock : MdCheck}

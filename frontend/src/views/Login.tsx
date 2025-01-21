@@ -5,7 +5,7 @@ type Props = {};
 
 const Login = (props: Props) => {
   return (
-    <div className="h-full w-full flex justify-center items-center">
+    <div className="h-screen w-full flex justify-center items-center">
       <Card className="flex lg:w-4/12 w-5/6 flex-col gap-4 ">
         <h3 className="text-2xl dark:text-gray-100 font-semibold">Login</h3>
         <div>

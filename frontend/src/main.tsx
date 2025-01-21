@@ -4,11 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { CustomFlowbiteTheme, DarkThemeToggle, Flowbite } from "flowbite-react";
 
-
-const customTheme: CustomFlowbiteTheme = {
-
-};
-
+const customTheme: CustomFlowbiteTheme = {};
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

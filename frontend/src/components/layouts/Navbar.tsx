@@ -5,7 +5,7 @@ function NavbarComp() {
     <Navbar
       fluid
       rounded={true}
-      className="p-4 border-b-[1px] border-l-[1px] border-r-[1px]  border-gray-200"
+      className="p-4 border-b-[1px] border-l-[1px] border-r-[1px] border-gray-200 sticky top-0 z-50 dark:bg-gray-800/80 bg-white/80 backdrop-blur-md"
     >
       <Navbar.Brand>
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">

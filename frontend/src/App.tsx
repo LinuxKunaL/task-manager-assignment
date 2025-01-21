@@ -5,7 +5,7 @@ import Tasks from "./views/tasks/Index";
 
 function App() {
   return (
-    <div className="h-screen sw-screen dark:bg-gray-900 flex justify-center items-center overflow-s">
+    <div className="h-full overflow-y-auto scrollbar-thin dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800  scrollbar-thumb-gray-400 scrollbar-track-gray-300  dark:bg-gray-900 flex justify-center items-center">
       <div className="container h-full">
         <BrowserRouter>
           <Routes>
