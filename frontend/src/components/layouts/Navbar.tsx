@@ -1,10 +1,16 @@
 import { Avatar, DarkThemeToggle, Dropdown, Navbar } from "flowbite-react";
 import { TUser } from "../../types/user";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
-  data:TUser;
+  data: TUser;
 };
 function NavbarComp({ data }: Props) {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <Navbar
       rounded={true}
@@ -34,7 +40,7 @@ function NavbarComp({ data }: Props) {
               {data?.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
     </Navbar>
