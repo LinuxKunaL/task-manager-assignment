@@ -24,13 +24,16 @@ class Auth {
       const token = await user.generateToken();
 
       res.status(200).json({
+        success: true,
         message: "Login successful ✅",
         token,
       });
-    } catch (error) {
-      res.status(400).json({
-        error: error.message,
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(400).json({
+          error: error.message,
+        });
+      }
     }
   };
 
@@ -46,28 +49,31 @@ class Auth {
 
       res.status(201).json({
         message: "User registered successfully ✅",
+        success: true,
       });
-    } catch (error) {
-      if (error.name === "MongoServerError") {
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name === "MongoServerError") {
         return res.status(409).json({ error: "Email already exists" });
       }
-      return res.status(500).json({ error: error.message });
+      return res
+        .status(500)
+        .json({ error: error instanceof Error && error.message });
     }
   };
 
   me = async (req: Request, res: Response) => {
     try {
-      const _id = req.user;
-
+      const _id = req.userId;
       const user = await MUser.findById(_id, {
         password: 0,
         __v: 0,
         createdAt: 0,
       });
-
       res.status(200).json({ success: true, user });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      }
     }
   };
 }

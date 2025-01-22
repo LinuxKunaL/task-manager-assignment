@@ -1,8 +1,8 @@
 export type TTask = {
-  id: number;
+  _id: string;
   title: string;
   description: string;
   status: "pending" | "completed";
   createdAt: Date;
-  updatedAt: Date;
+  updatedA: Date;
 };

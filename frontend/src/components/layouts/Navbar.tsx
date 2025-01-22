@@ -1,6 +1,10 @@
 import { Avatar, DarkThemeToggle, Dropdown, Navbar } from "flowbite-react";
+import { TUser } from "../../types/user";
 
-function NavbarComp() {
+type Props = {
+  data:TUser;
+};
+function NavbarComp({ data }: Props) {
   return (
     <Navbar
       fluid
@@ -20,15 +24,15 @@ function NavbarComp() {
           label={
             <Avatar
               alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              img="https://avatar.iran.liara.run/public/19"
               rounded
             />
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
+            <span className="block text-sm">{data?.name}</span>
             <span className="block truncate text-sm font-medium">
-              name@flowbite.com
+              {data?.email}
             </span>
           </Dropdown.Header>
           <Dropdown.Item>Sign out</Dropdown.Item>

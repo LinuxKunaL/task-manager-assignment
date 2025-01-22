@@ -3,6 +3,15 @@ import config from "../config/index.ts";
 import MUser from "../database/model/user.ts";
 import { NextFunction, Request, Response } from "express";
 import print from "../utils/console.ts";
+import { IUser } from "../types/mongo.ts";
+
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string;
+    }
+  }
+}
 
 const verify = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -30,12 +39,13 @@ const verify = (req: Request, res: Response, next: NextFunction) => {
       }
       try {
         // check if user exists
-        const user = await MUser.findById(decoded?._id);
-
-        if (!user) return res.status(401).json({ error: "user not found" });
-
-        req.user = user._id.toString();
-
+        if (decoded && typeof decoded === "object" && "_id" in decoded) {
+          const user = await MUser.findById(decoded._id);
+          if (!user) return res.status(401).json({ error: "user not found" });
+          if (user._id) {
+            req.userId = user._id.toString();
+          }
+        }
         next();
       } catch (error) {
         res.status(401).json({ error: "user not found" });

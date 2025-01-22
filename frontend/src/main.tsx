@@ -7,9 +7,9 @@ import { CustomFlowbiteTheme, DarkThemeToggle, Flowbite } from "flowbite-react";
 const customTheme: CustomFlowbiteTheme = {};
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  // <StrictMode>
     <Flowbite theme={{ theme: customTheme }}>
       <App />
     </Flowbite>
-  </StrictMode>
+  // </StrictMode>
 );

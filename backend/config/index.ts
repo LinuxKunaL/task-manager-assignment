@@ -10,7 +10,7 @@ type TConfig = {
 
 const config: TConfig = {
   port: process.env.PORT || "3000",
-  dbUrl: process.env.MONGODB_URL || "mongodb://localhost:27017",
+  dbUrl: process.env.MONGODB_URL || "mongodb://localhost:27017/task-manager",
   jwt: process.env.JWT_SECRET || "secret",
 };
 

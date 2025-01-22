@@ -1,9 +1,10 @@
-import { model, Schema } from "mongoose";
+import { CallbackError, model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../../config/index.ts";
+import { IUser } from "../../types/mongo.ts";
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
   name: {
     type: String,
     required: true,
@@ -35,12 +36,12 @@ userSchema.pre("save", async function (next) {
 
     this.password = await bcrypt.hash(this.password, salt);
     next();
-  } catch (error) {
+  } catch (error: any) {
     next(error);
   }
 });
 
-userSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password: string) {
   try {
     return await bcrypt.compare(password, this.password);
   } catch (error) {

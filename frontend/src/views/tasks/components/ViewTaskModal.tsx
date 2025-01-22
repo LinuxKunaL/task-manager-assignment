@@ -10,9 +10,9 @@ type Props = {
   setOpenModal: (param: boolean) => void;
   data: TTask | null;
   actions: {
-    handleEditTask: (id: number) => void;
-    handleDeleteTask: (id: number) => void;
-    handleCheckTask: (id: number) => void;
+    handleEditTask: (id: string) => void;
+    handleDeleteTask: (id: string) => void;
+    handleCheckTask: (id: string) => void;
   };
 };
 
@@ -41,14 +41,14 @@ function ViewTaskModal(props: Props) {
             {isCompleted ? (
               <MdRedo
                 onClick={() =>
-                  props.actions.handleCheckTask(props.data?.id as number)
+                  props.actions.handleCheckTask(props.data?._id as string)
                 }
                 className="h-5 w-5 cursor-pointer"
               />
             ) : (
               <MdCheck
                 onClick={() =>
-                  props.actions.handleCheckTask(props.data?.id as number)
+                  props.actions.handleCheckTask(props.data?._id as string)
                 }
                 className="h-5 w-5 cursor-pointer"
               />
@@ -57,7 +57,7 @@ function ViewTaskModal(props: Props) {
           <Tooltip content="Edit task" className="font-normal">
             <MdEdit
               onClick={() =>
-                props.actions.handleEditTask(props.data?.id as number)
+                props.actions.handleEditTask(props.data?._id as string)
               }
               className="h-5 w-5 cursor-pointer"
             />
@@ -65,7 +65,7 @@ function ViewTaskModal(props: Props) {
           <Tooltip content="Delete task" className="font-normal">
             <MdDelete
               onClick={() =>
-                props.actions.handleDeleteTask(props.data?.id as number)
+                props.actions.handleDeleteTask(props.data?._id as string)
               }
               className="h-5 w-5 cursor-pointer text-red-500"
             />

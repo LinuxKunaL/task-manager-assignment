@@ -3,7 +3,9 @@ const scrollBar = require("tailwind-scrollbar");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
   theme: {
-    extend: {},
+    fontFamily: {
+      rubik: ["Rubik", "sans-serif"],
+    },
   },
   plugins: [flowbite.plugin(), scrollBar()],
 };

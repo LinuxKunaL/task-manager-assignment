@@ -9,7 +9,7 @@ type PrintColor =
   | "gray"
   | "grayLight"
   | "black";
-
+  
 const print = (string: string, color: PrintColor) => {
   const colors = {
     red: "\x1b[31m",
