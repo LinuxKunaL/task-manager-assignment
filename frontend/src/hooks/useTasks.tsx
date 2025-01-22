@@ -1,5 +1,5 @@
 import api from "../app/api";
-import { TTask } from "../types/task";
+import { TEditTask, TTaskForm } from "../types/task";
 
 function useTasks() {
   const getTasks = async () => {
@@ -26,9 +26,15 @@ function useTasks() {
     return result.data;
   };
 
-  const updateTask = () => {};
+  const updateTask = async (id: string, data: TEditTask) => {
+    const result = await api.patch("/task", { id, data });
+    if (result.data.error) {
+      return { error: result.data.error };
+    }
+    return result.data;
+  };
 
-  const addTask = async (data: TTask) => {
+  const addTask = async (data: TTaskForm) => {
     const result = await api.put("/task", data);
     if (result.data.error) {
       return { error: result.data.error };

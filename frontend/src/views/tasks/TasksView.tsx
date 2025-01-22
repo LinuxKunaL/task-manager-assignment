@@ -5,7 +5,7 @@ import { TTask } from "../../types/task";
 import AddTaskModal from "./components/AddTaskModal";
 import ViewTaskModal from "./components/ViewTaskModal";
 import EditTaskModal from "./components/EditTaskModal";
-import { MdList, MdSearch } from "react-icons/md";
+import { MdClose, MdList, MdSearch } from "react-icons/md";
 import useTasks from "../../hooks/useTasks";
 import useToast from "../../hooks/useToast";
 
@@ -87,32 +87,29 @@ function Tasks() {
       return setFilteredTasksList(tasksList as TTask[]);
     }
     const data = tasksList?.filter((task) => {
-      const taskDate = new Date(task.createdAt);
+      const taskDate = new Date(task.date);
       return taskDate.toDateString() === date?.toDateString();
     });
     setFilteredTasksList(data as TTask[]);
   };
 
   const handleSearch = () => {
-    if (!searchQuery) {
-      return setFilteredTasksList(tasksList as TTask[]);
+    if (!searchQuery.trim()) {
+      toastError("Please enter a search query");
+      setFilteredTasksList(tasksList ?? []);
+      return;
     }
-    const data = tasksList?.filter((task) =>
+
+    const filteredData = tasksList?.filter((task) =>
       task.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setFilteredTasksList(data as TTask[]);
+
+    setFilteredTasksList(filteredData ?? []);
   };
 
-  const handleClearSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      if (searchQuery === "") {
-        setSearchQuery("");
-        handleSearch();
-      }
-    }
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setFilteredTasksList(tasksList ?? []);
   };
 
   return (
@@ -139,12 +136,7 @@ function Tasks() {
             </Button>
           </div>
           <div className="flex gap-2">
-            <Dropdown
-              label={filterLabel}
-              color="dark"
-              arrowIcon={false}
-              dismissOnClick={false}
-            >
+            <Dropdown label={filterLabel} color="dark" arrowIcon={false}>
               <Dropdown.Item onClick={() => filterTasks("all")}>
                 all
               </Dropdown.Item>
@@ -155,12 +147,21 @@ function Tasks() {
                 completed
               </Dropdown.Item>
             </Dropdown>
-            <TextInput
-              placeholder="Search"
-              onKeyDown={handleClearSearch}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
+            <div className="relative select-none">
+              <TextInput
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full"
+              />
+              {searchQuery && (
+                <MdClose
+                  onClick={handleClearSearch}
+                  className="absolute right-2 top-0 bottom-0 my-auto cursor-pointer text-teal-500 transition-all hover:text-teal-300 size-5"
+                />
+              )}
+            </div>
+
             <Button onClick={handleSearch}>
               <MdSearch className="size-5" />
             </Button>
@@ -183,7 +184,7 @@ function Tasks() {
       {filteredTasksList?.length === 0 && (
         <div className="flex justify-center items-center w-full p-4 h-[50%] ">
           <div className="flex flex-col gap-2 w-auto text-center justify-center items-center">
-            <MdList size={23} color="#3b82f6" />
+            <MdList size={23} className="text-teal-500" />
             <p className="text-gray-500 font-semibold">No tasks found</p>
           </div>
         </div>
@@ -212,6 +213,7 @@ function Tasks() {
           show={openEditTask}
           setClose={setOpenEditTask}
           data={singleTaskData as TTask}
+          setStateRefresh={setStateRefresh}
         />
       )}
     </main>

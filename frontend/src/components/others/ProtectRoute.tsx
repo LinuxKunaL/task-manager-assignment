@@ -14,6 +14,9 @@ function ProtectRoute({ children, publicComponent }: Props) {
     if (!publicComponent && !token) {
       navigate("/login");
     }
+    if (publicComponent && token) {
+      navigate("/tasks");
+    }
   }, [publicComponent, token, navigate]);
 
   if (publicComponent || token) {

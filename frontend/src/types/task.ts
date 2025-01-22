@@ -3,6 +3,18 @@ export type TTask = {
   title: string;
   description: string;
   status: "pending" | "completed";
-  createdAt: Date;
-  updatedA: Date;
+  date: string;
+  updatedAt: string;
+};
+
+export type TEditTask = {
+  title: string;
+  date: string;
+  description: string;
+}
+
+export type TTaskForm = {
+  title: string;
+  date: string;
+  description: string;
 };

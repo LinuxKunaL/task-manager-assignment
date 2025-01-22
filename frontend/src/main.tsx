@@ -2,14 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { CustomFlowbiteTheme, DarkThemeToggle, Flowbite } from "flowbite-react";
-
-const customTheme: CustomFlowbiteTheme = {};
+import { Flowbite } from "flowbite-react";
 
 createRoot(document.getElementById("root")!).render(
-  // <StrictMode>
-    <Flowbite theme={{ theme: customTheme }}>
+  <StrictMode>
+    <Flowbite theme={{ mode: "dark" }}>
       <App />
     </Flowbite>
-  // </StrictMode>
+  </StrictMode>
 );

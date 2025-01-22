@@ -13,7 +13,7 @@ class Tasks {
 
   async deleteTask(req: Request, res: Response) {
     try {
-      await MTask.deleteOne({ _id: req.query.id});
+      await MTask.deleteOne({ _id: req.query.id });
       return res.status(200).json({ success: true, message: "Task deleted" });
     } catch (error) {
       return res.status(500).json({ success: false, error });
@@ -35,7 +35,23 @@ class Tasks {
 
       await MTask.findOneAndUpdate(
         { _id: req.body.id },
-        { status: task?.status === "pending" ? "completed" : "pending" }
+        {
+          status: task?.status === "pending" ? "completed" : "pending",
+          updatedAt: new Date().toLocaleString(),
+        }
+      );
+      return res.status(200).json({ success: true, message: "Task updated" });
+    } catch (error) {
+      return res.status(500).json({ success: false, error });
+    }
+  }
+
+  async updateTask(req: Request, res: Response) {
+    try {
+      const { id, data } = req.body;
+      await MTask.findOneAndUpdate(
+        { _id: id },
+        { ...data, updatedAt: new Date().toLocaleString()}
       );
       return res.status(200).json({ success: true, message: "Task updated" });
     } catch (error) {

@@ -18,6 +18,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.data.error) {
+      alert(error.response.data.error);
+      window.location.href = "/login";
       localStorage.removeItem("token");
       return;
     }

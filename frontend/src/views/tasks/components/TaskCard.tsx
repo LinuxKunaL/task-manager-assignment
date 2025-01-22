@@ -25,7 +25,7 @@ function TaskCard(props: Props) {
           <span
             className={`text-sm font-medium text-gray-900 dark:text-gray-400 ${lineThrough}`}
           >
-            {new Date(props.createdAt).toLocaleDateString()}
+            {new Date(props.date).toDateString()}
           </span>
           <h5
             className={`text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-200 ${lineThrough}`}

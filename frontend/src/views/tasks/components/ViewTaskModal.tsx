@@ -23,9 +23,18 @@ function ViewTaskModal(props: Props) {
     <Modal show={props.openModal} onClose={() => props.setOpenModal(false)}>
       <Modal.Header className="dark:bg-gray-800 bg-white">
         <div className="flex justify-between gap-3 items-center">
-          <p className="text-lg ">
-            {new Date(props.data?.createdAt as Date).toDateString()}
-          </p>
+          <div className="flex flex-col gap-2">
+            <p className="text-lg ">
+              {new Date(props.data?.date as string).toDateString()}
+            </p>
+            {props.data?.updatedAt && (
+              <p className="text-xs flex gap-1 text-gray-400">
+                Update at :{" "}
+                <p className="text-teal-400"> {props.data?.updatedAt}</p>
+              </p>
+            )}
+          </div>
+
           <Hr />
           <Badge
             color={!isCompleted ? "warning" : "green"}

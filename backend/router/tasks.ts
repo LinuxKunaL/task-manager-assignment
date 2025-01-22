@@ -17,6 +17,9 @@ router
   })
   .put((req: Request, res: Response) => {
     tasks.putTask(req, res);
+  })
+  .patch((req: Request, res: Response) => {
+    tasks.updateTask(req, res);
   });
 
 export default router;

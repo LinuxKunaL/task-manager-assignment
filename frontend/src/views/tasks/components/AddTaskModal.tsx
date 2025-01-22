@@ -10,6 +10,7 @@ import {
 import useTasks from "../../../hooks/useTasks";
 import { FieldValues, useForm } from "react-hook-form";
 import useToast from "../../../hooks/useToast";
+import { TTaskForm } from "../../../types/task";
 
 type Props = {
   openAddTask: boolean;
@@ -37,9 +38,11 @@ function AddTaskModal(props: Props) {
       date: data.date as string,
       description: data.description as string,
     };
-    const taskWithDate = {
+    const taskWithDate: TTaskForm = {
       ...task,
-      date: new Date(task.date).toDateString() || new Date().toDateString(),
+      date: task.date
+        ? new Date(task.date).toDateString()
+        : new Date().toDateString(),
     };
     const result = await addTask(taskWithDate);
 

@@ -7,7 +7,6 @@ type Props = {
 function NavbarComp({ data }: Props) {
   return (
     <Navbar
-      fluid
       rounded={true}
       className="p-4 border-b-[1px] border-l-[1px] border-r-[1px] border-gray-200 sticky top-0 z-50 dark:bg-gray-800/80 bg-white/80 backdrop-blur-md"
     >
@@ -37,7 +36,6 @@ function NavbarComp({ data }: Props) {
           </Dropdown.Header>
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
-        <Navbar.Toggle />
       </div>
     </Navbar>
   );

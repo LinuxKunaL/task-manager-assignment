@@ -33,7 +33,7 @@ function App() {
               path="/"
               element={
                 <ProtectRoute publicComponent>
-                  <Login />
+                  <SignUp />
                 </ProtectRoute>
               }
             />
